@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaviyasudharshini V | ECE Portfolio</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+        background: #0f172a;
+        color: #ffffff;
+        overflow-x: hidden;
+    }
+
+    /* Scrollable height */
+    body {
+        height: 400vh;
+    }
+
+    /* Background animation canvas */
+    #animation-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.08; /* Watermark effect */
+    }
+
+    canvas {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .content {
+        position: relative;
+        z-index: 2;
+        padding: 80px 10%;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    section {
+        margin-bottom: 120px;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 40px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+        font-size: 40px;
+        margin-bottom: 10px;
+        color: #38bdf8;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #22d3ee;
+    }
+
+    p, li {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+    ul {
+        margin-left: 20px;
+    }
+
+    .highlight {
+        color: #38bdf8;
+        font-weight: bold;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    footer {
+        text-align: center;
+        padding: 40px;
+        color: #aaa;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div id="animation-container">
+    <canvas id="hero-lightpass"></canvas>
+</div>
+
+<div class="content">
+
+    <section class="center">
+        <h1>Kaviyasudharshini V</h1>
+        <p class="highlight">Electronics and Communication Engineering Student</p>
+        <p>Government College of Engineering, Tirunelveli</p>
+        <p>CGPA: 8.05</p>
+    </section>
+
+    <section>
+        <h2>About Me</h2>
+        <p>
+            I am currently pursuing my 3rd year in Electronics and Communication Engineering 
+            at Government College of Engineering, Tirunelveli. I am passionate about 
+            electronics, embedded systems, and smart technology solutions. 
+            I continuously strive to enhance my technical knowledge and practical skills.
+        </p>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <ul>
+            <li><strong>B.E - Electronics and Communication Engineering</strong><br>
+                Government College of Engineering, Tirunelveli<br>
+                CGPA: 8.05
+            </li>
+
+            <li><strong>Higher Secondary (12th)</strong><br>
+                Don Bosco Matric Hr. Sec. School, Paramakudi<br>
+                Marks: 537
+            </li>
+
+            <li><strong>SSLC (10th)</strong><br>
+                Don Bosco Matric Hr. Sec. School, Paramakudi<br>
+                Marks: 434
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Projects</h2>
+        <ul>
+            <li>
+                <strong>Smart Plant Monitoring System</strong><br>
+                Designed a system using sensors to monitor soil moisture, temperature, 
+                and humidity to automate irrigation.
+            </li>
+
+            <li>
+                <strong>Smart Lock System</strong><br>
+                Developed an electronic security system using embedded hardware 
+                for secure access control.
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Internship</h2>
+        <p>
+            <strong>IPCS Global</strong><br>
+            Successfully completed internship training gaining exposure to 
+            industrial automation and embedded systems concepts.
+        </p>
+    </section>
+
+    <section>
+        <h2>Career Objective</h2>
+        <p>
+            To secure a challenging role in the field of Electronics and Communication 
+            Engineering where I can apply my knowledge, improve my skills, and contribute 
+            to innovative technological advancements.
+        </p>
+    </section>
+
+</div>
+
+<footer>
+    © 2026 Kaviyasudharshini V | ECE Portfolio
+</footer>
+
+<script>
+const html = document.documentElement;
+const canvas = document.getElementById("hero-lightpass");
+const context = canvas.getContext("2d");
+
+const frameCount = 240;
+const currentFrame = index => (
+  `frames/ezgif-frame-${String(index).padStart(3, '0')}.jpg`
+);
+
+const images = [];
+let img = new Image();
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+for (let i = 1; i <= frameCount; i++) {
+  const img = new Image();
+  img.src = currentFrame(i);
+  images.push(img);
+}
+
+function render() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.drawImage(images[frameIndex], 0, 0, canvas.width, canvas.height);
+}
+
+let frameIndex = 0;
+
+images[0].onload = render;
+
+window.addEventListener("scroll", () => {
+  const scrollTop = html.scrollTop;
+  const maxScrollTop = html.scrollHeight - window.innerHeight;
+  const scrollFraction = scrollTop / maxScrollTop;
+  frameIndex = Math.min(
+    frameCount - 1,
+    Math.ceil(scrollFraction * frameCount)
+  );
+
+  requestAnimationFrame(render);
+});
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  render();
+});
+</script>
+
+</body>
+</html>
